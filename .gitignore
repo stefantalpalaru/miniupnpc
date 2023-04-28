@@ -34,3 +34,6 @@ validateigddescparse
 dist/
 miniupnpc.egg-info/
 init
+.deps
+Makefile
+/include
