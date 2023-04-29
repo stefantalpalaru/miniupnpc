@@ -677,8 +677,8 @@ maintainer-clean-generic:
 	-test -z "$(BUILT_SOURCES)" || rm -f $(BUILT_SOURCES)
 clean: clean-am
 
-clean-am: clean-generic clean-libtool clean-noinstLIBRARIES \
-	mostlyclean-am
+clean-am: clean-generic clean-libtool clean-local \
+	clean-noinstLIBRARIES mostlyclean-am
 
 distclean: distclean-am
 		-rm -f ./$(DEPDIR)/connecthostport.Po
@@ -773,7 +773,7 @@ uninstall-am:
 .MAKE: all check install install-am install-exec install-strip
 
 .PHONY: CTAGS GTAGS TAGS all all-am am--depfiles check check-am clean \
-	clean-generic clean-libtool clean-noinstLIBRARIES \
+	clean-generic clean-libtool clean-local clean-noinstLIBRARIES \
 	cscopelist-am ctags ctags-am distclean distclean-compile \
 	distclean-generic distclean-libtool distclean-tags distdir dvi \
 	dvi-am html html-am info info-am install install-am \
@@ -793,8 +793,11 @@ miniupnpcstrings.h: Makefile
 	$(srcdir)/updateminiupnpcstrings.sh $(srcdir)/VERSION $(srcdir)/miniupnpcstrings.h.in $@
 
 $(builddir)/include/miniupnp:
-	$(MKDIR_P) $(builddir)/include
-	(cd $(builddir)/include && $(LN_S) $(abs_srcdir) miniupnp)
+	$(MKDIR_P) $(builddir)/include/miniupnp
+	cp -a *.h $(builddir)/include/miniupnp
+
+clean-local:
+	-rm -rf $(builddir)/include
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.

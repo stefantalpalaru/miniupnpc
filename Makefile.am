@@ -53,7 +53,10 @@ miniupnpcstrings.h: Makefile
 	$(srcdir)/updateminiupnpcstrings.sh $(srcdir)/VERSION $(srcdir)/miniupnpcstrings.h.in $@
 
 $(builddir)/include/miniupnp:
-	$(MKDIR_P) $(builddir)/include
-	(cd $(builddir)/include && $(LN_S) $(abs_srcdir) miniupnp)
+	$(MKDIR_P) $(builddir)/include/miniupnp
+	cp -a *.h $(builddir)/include/miniupnp
+
+clean-local:
+	-rm -rf $(builddir)/include
 
 DISTCLEANFILES = $(builddir)/miniupnpcstrings.h
