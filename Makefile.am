@@ -17,7 +17,7 @@ libminiupnp_a_SOURCES = \
 	upnperrors.c \
 	upnpreplyparse.c
 
-libminiupnp_a_DEPENDENCIES = $(builddir)/include/miniupnp
+libminiupnp_a_DEPENDENCIES = $(builddir)/include/miniupnpc
 
 noinst_HEADERS = \
 	codelength.h \
@@ -52,9 +52,9 @@ BUILT_SOURCES = \
 miniupnpcstrings.h: Makefile
 	$(srcdir)/updateminiupnpcstrings.sh $(srcdir)/VERSION $(srcdir)/miniupnpcstrings.h.in $@
 
-$(builddir)/include/miniupnp:
-	$(MKDIR_P) $(builddir)/include/miniupnp
-	cp -a *.h $(builddir)/include/miniupnp
+$(builddir)/include/miniupnpc:
+	$(MKDIR_P) $(builddir)/include/miniupnpc
+	cp -a *.h $(builddir)/include/miniupnpc
 
 clean-local:
 	-rm -rf $(builddir)/include
