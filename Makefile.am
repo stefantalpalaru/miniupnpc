@@ -42,12 +42,14 @@ EXTRA_DIST = \
 	README \
 	LICENSE \
 	VERSION \
+	include \
 	miniupnpcstrings.h.cmake \
 	miniupnpcstrings.h.in \
 	updateminiupnpcstrings.sh
 
 BUILT_SOURCES = \
-	miniupnpcstrings.h
+	miniupnpcstrings.h \
+	$(builddir)/include/miniupnpc
 
 miniupnpcstrings.h: Makefile
 	$(srcdir)/updateminiupnpcstrings.sh $(srcdir)/VERSION $(srcdir)/miniupnpcstrings.h.in $@
