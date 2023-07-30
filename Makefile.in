@@ -105,21 +105,17 @@ DIST_COMMON = $(srcdir)/Makefile.am $(noinst_HEADERS) \
 mkinstalldirs = $(install_sh) -d
 CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
-LIBRARIES = $(noinst_LIBRARIES)
-ARFLAGS = cru
-AM_V_AR = $(am__v_AR_@AM_V@)
-am__v_AR_ = $(am__v_AR_@AM_DEFAULT_V@)
-am__v_AR_0 = @echo "  AR      " $@;
-am__v_AR_1 = 
-libminiupnp_a_AR = $(AR) $(ARFLAGS)
-libminiupnp_a_LIBADD =
-am_libminiupnp_a_OBJECTS = connecthostport.$(OBJEXT) \
-	igd_desc_parse.$(OBJEXT) minisoap.$(OBJEXT) \
-	minissdpc.$(OBJEXT) miniupnpc.$(OBJEXT) miniwget.$(OBJEXT) \
-	minixml.$(OBJEXT) portlistingparse.$(OBJEXT) \
-	receivedata.$(OBJEXT) upnpcommands.$(OBJEXT) upnpdev.$(OBJEXT) \
-	upnperrors.$(OBJEXT) upnpreplyparse.$(OBJEXT)
-libminiupnp_a_OBJECTS = $(am_libminiupnp_a_OBJECTS)
+LTLIBRARIES = $(noinst_LTLIBRARIES)
+libminiupnp_la_LIBADD =
+am_libminiupnp_la_OBJECTS = connecthostport.lo igd_desc_parse.lo \
+	minisoap.lo minissdpc.lo miniupnpc.lo miniwget.lo minixml.lo \
+	portlistingparse.lo receivedata.lo upnpcommands.lo upnpdev.lo \
+	upnperrors.lo upnpreplyparse.lo
+libminiupnp_la_OBJECTS = $(am_libminiupnp_la_OBJECTS)
+AM_V_lt = $(am__v_lt_@AM_V@)
+am__v_lt_ = $(am__v_lt_@AM_DEFAULT_V@)
+am__v_lt_0 = --silent
+am__v_lt_1 = 
 AM_V_P = $(am__v_P_@AM_V@)
 am__v_P_ = $(am__v_P_@AM_DEFAULT_V@)
 am__v_P_0 = false
@@ -135,20 +131,16 @@ am__v_at_1 =
 DEFAULT_INCLUDES = -I.@am__isrc@
 depcomp = $(SHELL) $(top_srcdir)/depcomp
 am__maybe_remake_depfiles = depfiles
-am__depfiles_remade = ./$(DEPDIR)/connecthostport.Po \
-	./$(DEPDIR)/igd_desc_parse.Po ./$(DEPDIR)/minisoap.Po \
-	./$(DEPDIR)/minissdpc.Po ./$(DEPDIR)/miniupnpc.Po \
-	./$(DEPDIR)/miniwget.Po ./$(DEPDIR)/minixml.Po \
-	./$(DEPDIR)/portlistingparse.Po ./$(DEPDIR)/receivedata.Po \
-	./$(DEPDIR)/upnpcommands.Po ./$(DEPDIR)/upnpdev.Po \
-	./$(DEPDIR)/upnperrors.Po ./$(DEPDIR)/upnpreplyparse.Po
+am__depfiles_remade = ./$(DEPDIR)/connecthostport.Plo \
+	./$(DEPDIR)/igd_desc_parse.Plo ./$(DEPDIR)/minisoap.Plo \
+	./$(DEPDIR)/minissdpc.Plo ./$(DEPDIR)/miniupnpc.Plo \
+	./$(DEPDIR)/miniwget.Plo ./$(DEPDIR)/minixml.Plo \
+	./$(DEPDIR)/portlistingparse.Plo ./$(DEPDIR)/receivedata.Plo \
+	./$(DEPDIR)/upnpcommands.Plo ./$(DEPDIR)/upnpdev.Plo \
+	./$(DEPDIR)/upnperrors.Plo ./$(DEPDIR)/upnpreplyparse.Plo
 am__mv = mv -f
 COMPILE = $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) \
 	$(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
-AM_V_lt = $(am__v_lt_@AM_V@)
-am__v_lt_ = $(am__v_lt_@AM_DEFAULT_V@)
-am__v_lt_0 = --silent
-am__v_lt_1 = 
 LTCOMPILE = $(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) \
 	$(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) \
 	$(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) \
@@ -165,8 +157,8 @@ AM_V_CCLD = $(am__v_CCLD_@AM_V@)
 am__v_CCLD_ = $(am__v_CCLD_@AM_DEFAULT_V@)
 am__v_CCLD_0 = @echo "  CCLD    " $@;
 am__v_CCLD_1 = 
-SOURCES = $(libminiupnp_a_SOURCES)
-DIST_SOURCES = $(libminiupnp_a_SOURCES)
+SOURCES = $(libminiupnp_la_SOURCES)
+DIST_SOURCES = $(libminiupnp_la_SOURCES)
 am__can_run_installinfo = \
   case $$AM_UPDATE_INFO_DIR in \
     n|no|NO) false;; \
@@ -427,9 +419,9 @@ top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 transmissionlocaledir = @transmissionlocaledir@
-noinst_LIBRARIES = libminiupnp.a
+noinst_LTLIBRARIES = libminiupnp.la
 AM_CFLAGS = @PTHREAD_CFLAGS@ -DNDEBUG -D_GNU_SOURCE
-libminiupnp_a_SOURCES = \
+libminiupnp_la_SOURCES = \
 	connecthostport.c \
 	igd_desc_parse.c \
 	minisoap.c \
@@ -444,7 +436,7 @@ libminiupnp_a_SOURCES = \
 	upnperrors.c \
 	upnpreplyparse.c
 
-libminiupnp_a_DEPENDENCIES = $(builddir)/include/miniupnpc
+libminiupnp_la_DEPENDENCIES = $(builddir)/include/miniupnpc
 noinst_HEADERS = \
 	codelength.h \
 	connecthostport.h \
@@ -513,13 +505,19 @@ $(ACLOCAL_M4): @MAINTAINER_MODE_TRUE@ $(am__aclocal_m4_deps)
 	cd $(top_builddir) && $(MAKE) $(AM_MAKEFLAGS) am--refresh
 $(am__aclocal_m4_deps):
 
-clean-noinstLIBRARIES:
-	-test -z "$(noinst_LIBRARIES)" || rm -f $(noinst_LIBRARIES)
+clean-noinstLTLIBRARIES:
+	-test -z "$(noinst_LTLIBRARIES)" || rm -f $(noinst_LTLIBRARIES)
+	@list='$(noinst_LTLIBRARIES)'; \
+	locs=`for p in $$list; do echo $$p; done | \
+	      sed 's|^[^/]*$$|.|; s|/[^/]*$$||; s|$$|/so_locations|' | \
+	      sort -u`; \
+	test -z "$$locs" || { \
+	  echo rm -f $${locs}; \
+	  rm -f $${locs}; \
+	}
 
-libminiupnp.a: $(libminiupnp_a_OBJECTS) $(libminiupnp_a_DEPENDENCIES) $(EXTRA_libminiupnp_a_DEPENDENCIES) 
-	$(AM_V_at)-rm -f libminiupnp.a
-	$(AM_V_AR)$(libminiupnp_a_AR) libminiupnp.a $(libminiupnp_a_OBJECTS) $(libminiupnp_a_LIBADD)
-	$(AM_V_at)$(RANLIB) libminiupnp.a
+libminiupnp.la: $(libminiupnp_la_OBJECTS) $(libminiupnp_la_DEPENDENCIES) $(EXTRA_libminiupnp_la_DEPENDENCIES) 
+	$(AM_V_CCLD)$(LINK)  $(libminiupnp_la_OBJECTS) $(libminiupnp_la_LIBADD) $(LIBS)
 
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)
@@ -527,19 +525,19 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/connecthostport.Po@am__quote@ # am--include-marker
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/igd_desc_parse.Po@am__quote@ # am--include-marker
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/minisoap.Po@am__quote@ # am--include-marker
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/minissdpc.Po@am__quote@ # am--include-marker
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/miniupnpc.Po@am__quote@ # am--include-marker
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/miniwget.Po@am__quote@ # am--include-marker
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/minixml.Po@am__quote@ # am--include-marker
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/portlistingparse.Po@am__quote@ # am--include-marker
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/receivedata.Po@am__quote@ # am--include-marker
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/upnpcommands.Po@am__quote@ # am--include-marker
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/upnpdev.Po@am__quote@ # am--include-marker
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/upnperrors.Po@am__quote@ # am--include-marker
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/upnpreplyparse.Po@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/connecthostport.Plo@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/igd_desc_parse.Plo@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/minisoap.Plo@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/minissdpc.Plo@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/miniupnpc.Plo@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/miniwget.Plo@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/minixml.Plo@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/portlistingparse.Plo@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/receivedata.Plo@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/upnpcommands.Plo@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/upnpdev.Plo@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/upnperrors.Plo@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/upnpreplyparse.Plo@am__quote@ # am--include-marker
 
 $(am__depfiles_remade):
 	@$(MKDIR_P) $(@D)
@@ -664,7 +662,7 @@ distdir-am: $(DISTFILES)
 check-am: all-am
 check: $(BUILT_SOURCES)
 	$(MAKE) $(AM_MAKEFLAGS) check-am
-all-am: Makefile $(LIBRARIES) $(HEADERS)
+all-am: Makefile $(LTLIBRARIES) $(HEADERS)
 installdirs:
 install: $(BUILT_SOURCES)
 	$(MAKE) $(AM_MAKEFLAGS) install-am
@@ -703,22 +701,22 @@ maintainer-clean-generic:
 clean: clean-am
 
 clean-am: clean-generic clean-libtool clean-local \
-	clean-noinstLIBRARIES mostlyclean-am
+	clean-noinstLTLIBRARIES mostlyclean-am
 
 distclean: distclean-am
-		-rm -f ./$(DEPDIR)/connecthostport.Po
-	-rm -f ./$(DEPDIR)/igd_desc_parse.Po
-	-rm -f ./$(DEPDIR)/minisoap.Po
-	-rm -f ./$(DEPDIR)/minissdpc.Po
-	-rm -f ./$(DEPDIR)/miniupnpc.Po
-	-rm -f ./$(DEPDIR)/miniwget.Po
-	-rm -f ./$(DEPDIR)/minixml.Po
-	-rm -f ./$(DEPDIR)/portlistingparse.Po
-	-rm -f ./$(DEPDIR)/receivedata.Po
-	-rm -f ./$(DEPDIR)/upnpcommands.Po
-	-rm -f ./$(DEPDIR)/upnpdev.Po
-	-rm -f ./$(DEPDIR)/upnperrors.Po
-	-rm -f ./$(DEPDIR)/upnpreplyparse.Po
+		-rm -f ./$(DEPDIR)/connecthostport.Plo
+	-rm -f ./$(DEPDIR)/igd_desc_parse.Plo
+	-rm -f ./$(DEPDIR)/minisoap.Plo
+	-rm -f ./$(DEPDIR)/minissdpc.Plo
+	-rm -f ./$(DEPDIR)/miniupnpc.Plo
+	-rm -f ./$(DEPDIR)/miniwget.Plo
+	-rm -f ./$(DEPDIR)/minixml.Plo
+	-rm -f ./$(DEPDIR)/portlistingparse.Plo
+	-rm -f ./$(DEPDIR)/receivedata.Plo
+	-rm -f ./$(DEPDIR)/upnpcommands.Plo
+	-rm -f ./$(DEPDIR)/upnpdev.Plo
+	-rm -f ./$(DEPDIR)/upnperrors.Plo
+	-rm -f ./$(DEPDIR)/upnpreplyparse.Plo
 	-rm -f Makefile
 distclean-am: clean-am distclean-compile distclean-generic \
 	distclean-tags
@@ -764,19 +762,19 @@ install-ps-am:
 installcheck-am:
 
 maintainer-clean: maintainer-clean-am
-		-rm -f ./$(DEPDIR)/connecthostport.Po
-	-rm -f ./$(DEPDIR)/igd_desc_parse.Po
-	-rm -f ./$(DEPDIR)/minisoap.Po
-	-rm -f ./$(DEPDIR)/minissdpc.Po
-	-rm -f ./$(DEPDIR)/miniupnpc.Po
-	-rm -f ./$(DEPDIR)/miniwget.Po
-	-rm -f ./$(DEPDIR)/minixml.Po
-	-rm -f ./$(DEPDIR)/portlistingparse.Po
-	-rm -f ./$(DEPDIR)/receivedata.Po
-	-rm -f ./$(DEPDIR)/upnpcommands.Po
-	-rm -f ./$(DEPDIR)/upnpdev.Po
-	-rm -f ./$(DEPDIR)/upnperrors.Po
-	-rm -f ./$(DEPDIR)/upnpreplyparse.Po
+		-rm -f ./$(DEPDIR)/connecthostport.Plo
+	-rm -f ./$(DEPDIR)/igd_desc_parse.Plo
+	-rm -f ./$(DEPDIR)/minisoap.Plo
+	-rm -f ./$(DEPDIR)/minissdpc.Plo
+	-rm -f ./$(DEPDIR)/miniupnpc.Plo
+	-rm -f ./$(DEPDIR)/miniwget.Plo
+	-rm -f ./$(DEPDIR)/minixml.Plo
+	-rm -f ./$(DEPDIR)/portlistingparse.Plo
+	-rm -f ./$(DEPDIR)/receivedata.Plo
+	-rm -f ./$(DEPDIR)/upnpcommands.Plo
+	-rm -f ./$(DEPDIR)/upnpdev.Plo
+	-rm -f ./$(DEPDIR)/upnperrors.Plo
+	-rm -f ./$(DEPDIR)/upnpreplyparse.Plo
 	-rm -f Makefile
 maintainer-clean-am: distclean-am maintainer-clean-generic
 
@@ -798,18 +796,18 @@ uninstall-am:
 .MAKE: all check install install-am install-exec install-strip
 
 .PHONY: CTAGS GTAGS TAGS all all-am am--depfiles check check-am clean \
-	clean-generic clean-libtool clean-local clean-noinstLIBRARIES \
-	cscopelist-am ctags ctags-am distclean distclean-compile \
-	distclean-generic distclean-libtool distclean-tags distdir dvi \
-	dvi-am html html-am info info-am install install-am \
-	install-data install-data-am install-dvi install-dvi-am \
-	install-exec install-exec-am install-html install-html-am \
-	install-info install-info-am install-man install-pdf \
-	install-pdf-am install-ps install-ps-am install-strip \
-	installcheck installcheck-am installdirs maintainer-clean \
-	maintainer-clean-generic mostlyclean mostlyclean-compile \
-	mostlyclean-generic mostlyclean-libtool pdf pdf-am ps ps-am \
-	tags tags-am uninstall uninstall-am
+	clean-generic clean-libtool clean-local \
+	clean-noinstLTLIBRARIES cscopelist-am ctags ctags-am distclean \
+	distclean-compile distclean-generic distclean-libtool \
+	distclean-tags distdir dvi dvi-am html html-am info info-am \
+	install install-am install-data install-data-am install-dvi \
+	install-dvi-am install-exec install-exec-am install-html \
+	install-html-am install-info install-info-am install-man \
+	install-pdf install-pdf-am install-ps install-ps-am \
+	install-strip installcheck installcheck-am installdirs \
+	maintainer-clean maintainer-clean-generic mostlyclean \
+	mostlyclean-compile mostlyclean-generic mostlyclean-libtool \
+	pdf pdf-am ps ps-am tags tags-am uninstall uninstall-am
 
 .PRECIOUS: Makefile
 

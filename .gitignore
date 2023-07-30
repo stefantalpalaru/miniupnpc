@@ -1,6 +1,8 @@
 deb_dist/
 build/
 *.o
+*.lo
+*.la
 *.a
 *.so
 *.dll
@@ -8,6 +10,7 @@ build/
 *.exe
 *.lib
 *.dylib
+.libs
 Makefile.bak
 miniupnpcstrings.h
 pythonmodule
