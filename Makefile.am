@@ -52,13 +52,13 @@ BUILT_SOURCES = \
 	$(builddir)/include/miniupnpc
 
 miniupnpcstrings.h: Makefile
-	$(srcdir)/updateminiupnpcstrings.sh $(srcdir)/VERSION $(srcdir)/miniupnpcstrings.h.in $@
+	"$(srcdir)/updateminiupnpcstrings.sh" "$(srcdir)/VERSION" "$(srcdir)/miniupnpcstrings.h.in" $@
 
 $(builddir)/include/miniupnpc:
-	$(MKDIR_P) $(builddir)/include/miniupnpc
-	cp -a *.h $(builddir)/include/miniupnpc
+	$(MKDIR_P) "$(builddir)/include/miniupnpc"
+	cp -a "$(srcdir)"/*.h "$(builddir)/include/miniupnpc/"
 
 clean-local:
-	-rm -rf $(builddir)/include
+	-rm -rf "$(builddir)/include"
 
 DISTCLEANFILES = $(builddir)/miniupnpcstrings.h
