@@ -49,18 +49,18 @@ if (CMAKE_COMPILER_IS_GNUC)
   if (NOT CONFIGURED)
 
     if (NOT CMAKE_SYSTEM_NAME STREQUAL "AmigaOS")
-      set (_PIC -fPIC)
+      set(CMAKE_POSITION_INDEPENDENT_CODE ON)
     endif (CMAKE_SYSTEM_NAME STREQUAL "AmigaOS")
 
-    set (CMAKE_C_FLAGS "${_PIC} -Wall $ENV{CFLAGS}" # CMAKE_C_FLAGS gets appended to the other C flags
+    set (CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall"
         CACHE STRING "Flags used by the C compiler during normal builds." FORCE)
-    set (CMAKE_C_FLAGS_DEBUG "-g -DDDEBUG"
+    set (CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS_DEBUG} -DDDEBUG"
         CACHE STRING "Flags used by the C compiler during debug builds." FORCE)
-    set (CMAKE_C_FLAGS_RELEASE "-O2 -DNDEBUG"
+    set (CMAKE_C_FLAGS_RELEASE "${CMAKE_C_FLAGS_RELEASE} -DNDEBUG"
         CACHE STRING "Flags used by the C compiler during release builds." FORCE)
-    set (CMAKE_C_FLAGS_RELWITHDEBINFO "-O2 -g -DNDEBUG"
+    set (CMAKE_C_FLAGS_RELWITHDEBINFO "${CMAKE_C_FLAGS_RELWITHDEBINFO} -DNDEBUG"
         CACHE STRING "Flags used by the C compiler during release builds." FORCE)
-    set (CMAKE_C_FLAGS_MINSIZEREL "-Os -DNDEBUG"
+    set (CMAKE_C_FLAGS_MINSIZEREL "${CMAKE_C_FLAGS_MINSIZEREL} -DNDEBUG"
         CACHE STRING "Flags used by the C compiler during release builds." FORCE)
 
   endif (NOT CONFIGURED)
